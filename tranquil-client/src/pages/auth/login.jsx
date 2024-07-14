@@ -21,7 +21,7 @@ export default function Login() {
     <main className="flex items-center justify-center w-full h-screen">
       {/* Left section */}
       <section className="min-[900px]:flex-1 hidden min-[900px]:block min-[900px]:border-r h-screen ">
-        <img src={image} alt="" className="h-full w-full object-cover" />
+        <img src={image} alt="" className="object-cover w-full h-full" />
       </section>
 
       {/* Right section */}

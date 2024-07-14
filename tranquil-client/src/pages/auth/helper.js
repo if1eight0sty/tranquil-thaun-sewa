@@ -13,3 +13,15 @@ export const loginHelper = async (data) => {
     throw new Error("Login fail.");
   }
 };
+export const isValidateRegisterData = (data) => {
+  if (!data.email || !data.password || !data.name) return false;
+  return true;
+};
+export const registerHelper = async (data) => {
+  try {
+    const res = await _axios.post("auth/login", data);
+    return res;
+  } catch (error) {
+    throw new Error("Login fail.");
+  }
+};
