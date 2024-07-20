@@ -1,10 +1,11 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../../assets/images/login-page-image.png";
-import { isValidateRegisterData } from "./helper";
+import { isValidateRegisterData, registerHelper } from "./helper";
 export default function Register() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -13,10 +14,19 @@ export default function Register() {
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!isValidateRegisterData(data))
       return toast.error("Empty name, email or password");
+    try {
+      const res = await registerHelper(data);
+      if (res.status !== 200) throw new Error(res.message);
+
+      toast.success(res.message);
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <main className="flex items-center justify-center w-full h-screen">
@@ -119,7 +129,7 @@ export default function Register() {
               type="submit"
               className="w-full px-4 py-2 mt-6 text-lg font-semibold text-white rounded bg-[#2e2e2e] hover:shadow-lg"
             >
-              Login
+              Register
             </button>
 
             {/* Register link */}

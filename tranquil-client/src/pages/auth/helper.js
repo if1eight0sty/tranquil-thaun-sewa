@@ -20,8 +20,8 @@ export const isValidateRegisterData = (data) => {
 };
 export const registerHelper = async (data) => {
   try {
-    const res = await _axios.post("auth/login", data);
-    return res;
+    const res = await _axios.post("auth/register", data);
+    return res.data;
   } catch (error) {
     throw new Error("Login fail.");
   }
