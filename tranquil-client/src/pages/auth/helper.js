@@ -8,7 +8,8 @@ export const isValidateLoginData = (data) => {
 export const loginHelper = async (data) => {
   try {
     const res = await _axios.post("auth/login", data);
-    return res;
+
+    return res.data;
   } catch (error) {
     throw new Error("Login fail.");
   }

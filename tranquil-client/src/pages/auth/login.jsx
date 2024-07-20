@@ -3,7 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import image from "../../assets/images/login-page-image.png";
-import { isValidateLoginData } from "./helper";
+import { isValidateLoginData, loginHelper } from "./helper";
 export default function Login() {
   const [data, setData] = useState({
     email: "",
@@ -12,10 +12,19 @@ export default function Login() {
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!isValidateLoginData(data))
       return toast.error("Empty email or password");
+    try {
+      const res = await loginHelper(data);
+      if (res.status !== 200) throw new Error(res.message);
+
+      toast.success(res.message);
+      window.location.href = "/";
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <main className="flex items-center justify-center w-full h-screen">
