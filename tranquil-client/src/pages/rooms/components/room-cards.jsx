@@ -17,7 +17,7 @@ export default function RoomCards({ className, address, price, image }) {
           {address}
         </div>
         <Link
-          to={""}
+          to={"/room/69"}
           className="relative inline-block p-px text-xs font-semibold leading-6 text-white no-underline rounded-full shadow-2xl cursor-pointer bg-slate-700 group shadow-zinc-900"
         >
           <span className="absolute inset-0 overflow-hidden rounded-full">
