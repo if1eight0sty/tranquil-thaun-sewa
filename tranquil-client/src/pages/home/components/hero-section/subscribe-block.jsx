@@ -4,7 +4,9 @@ import { FiMail } from "react-icons/fi";
 export default function SubscribeBlock() {
   return (
     <Block className="col-span-12 md:col-span-9">
-      <p className="mb-3 text-lg">Get latest updates on available rooms</p>
+      <p className="mb-3 text-lg text-white">
+        Get latest updates on available rooms
+      </p>
       <form
         onSubmit={(e) => e.preventDefault()}
         className="flex items-center gap-2"

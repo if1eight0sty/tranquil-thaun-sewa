@@ -22,7 +22,7 @@ export default function Block({ className, ...rest }) {
         damping: 50,
       }}
       className={twMerge(
-        "col-span-4 rounded-lg border border-zinc-700 bg-zinc-800 p-6",
+        "col-span-4 rounded-lg border border-zinc-700 bg-zinc-700 p-6",
         className
       )}
       {...rest}

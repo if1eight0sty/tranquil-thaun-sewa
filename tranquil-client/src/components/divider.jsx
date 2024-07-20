@@ -6,7 +6,7 @@ export default function Divider({ title }) {
           aria-hidden="true"
           className="h-0.5 grow rounded bg-gray-200 dark:bg-gray-700/75"
         />
-        <span className="mx-3 text-lg font-medium">{title}</span>
+        {title && <span className="mx-3 text-lg font-medium">{title}</span>}
         <span
           aria-hidden="true"
           className="h-0.5 grow rounded bg-gray-200 dark:bg-gray-700/75"

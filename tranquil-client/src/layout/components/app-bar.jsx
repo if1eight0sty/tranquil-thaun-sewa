@@ -27,7 +27,7 @@ export default function AppBar() {
             </Link>
           </li>
           <li>
-            <Link to="/rooms" className="outline-none">
+            <Link to="/view-rooms" className="outline-none">
               Rooms
             </Link>
           </li>
