@@ -11,13 +11,11 @@ export default function UserInfo() {
             <p>Full Name</p>
             <p>Email Address</p>
             <p>Role</p>
-            <p>Gender</p>
           </div>
           <div className="] space-y-3">
             <p className="capitalize">{user?.name || "John Doe"}</p>
             <p>{user?.email || "johndoe@gmail.com"}</p>
             <p className="capitalize">{user?.role || "user"}</p>
-            <p className="capitalize">{user?.gender || "male"}</p>
           </div>
         </div>
       </div>

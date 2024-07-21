@@ -1,10 +1,11 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import image from "../../assets/images/login-page-image.png";
 import { isValidateLoginData, loginHelper } from "./helper";
 export default function Login() {
+  const token = localStorage.getItem("token");
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -19,14 +20,15 @@ export default function Login() {
     try {
       const res = await loginHelper(data);
       if (res.status !== 200) throw new Error(res.message);
-
       toast.success(res.message);
       window.location.href = "/";
     } catch (error) {
       toast.error(error.message);
     }
   };
-  return (
+  return token ? (
+    <Navigate to={"/"} />
+  ) : (
     <main className="flex items-center justify-center w-full h-screen">
       {/* Left section */}
       <section className="min-[900px]:flex-1 hidden min-[900px]:block min-[900px]:border-r h-screen ">

@@ -55,7 +55,7 @@ export const login = catchSync(async (req, res) => {
     });
   }
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "15m",
+    expiresIn: "7d",
   });
   const refreshToken = jwt.sign(
     { id: user._id },
@@ -74,7 +74,7 @@ export const login = catchSync(async (req, res) => {
 });
 
 export const logout = catchSync(async (req, res) => {
-  const user = await User.findById(req.user);
+  const user = await User.findById(req.user.id);
   if (!user) {
     return res.status(400).json({
       message: "User not found",
@@ -86,7 +86,9 @@ export const logout = catchSync(async (req, res) => {
 });
 
 export const me = catchSync(async (req, res) => {
-  const user = await User.findById(req.user);
+  const user = await User.findById(req.user.id).select(
+    "-password -token -role -createdAt -updatedAt -canPost"
+  );
   if (!user) {
     return res.status(400).json({
       message: "User not found",

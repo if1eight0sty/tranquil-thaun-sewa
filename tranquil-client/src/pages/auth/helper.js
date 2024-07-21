@@ -1,4 +1,4 @@
-import { _axios } from "../../config/config";
+import { authAxios } from "../../config/auth-axios";
 
 export const isValidateLoginData = (data) => {
   if (!data.email || !data.password) return false;
@@ -7,8 +7,8 @@ export const isValidateLoginData = (data) => {
 
 export const loginHelper = async (data) => {
   try {
-    const res = await _axios.post("auth/login", data);
-
+    const res = await authAxios().post("auth/login", data);
+    localStorage.setItem("token", res.data.token);
     return res.data;
   } catch (error) {
     throw new Error("Login fail.");
@@ -20,7 +20,7 @@ export const isValidateRegisterData = (data) => {
 };
 export const registerHelper = async (data) => {
   try {
-    const res = await _axios.post("auth/register", data);
+    const res = await authAxios().post("auth/register", data);
     return res.data;
   } catch (error) {
     throw new Error("Login fail.");
