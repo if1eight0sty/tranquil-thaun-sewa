@@ -1,0 +1,11 @@
+import { authAxios } from "../../config/auth-axios";
+
+export const getLatestUsers = async () => {
+  try {
+    const response = await authAxios().get("users/latest");
+
+    return response.data.status === 200 ? response.data.users : [];
+  } catch {
+    throw new Error("Error while fetching latest users");
+  }
+};

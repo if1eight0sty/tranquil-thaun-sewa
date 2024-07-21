@@ -24,6 +24,10 @@ const userSchema = new Schema(
     phone: {
       type: String,
     },
+    hasKyc: {
+      type: Boolean,
+      default: false,
+    },
     address: {
       type: String,
     },

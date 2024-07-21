@@ -14,23 +14,29 @@ export default function Sidebar() {
         <Icon icon="cbi:living-room" width={40} className="text-white" />
       </Link>
       <div className="flex flex-col justify-center flex-1 gap-3">
-        <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-          <Icon
-            icon="mage:dashboard-3-fill"
-            width={25}
-            className="text-white"
-          />
-        </NavItem>
-        <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-          <Icon
-            icon="heroicons:users-16-solid"
-            width={25}
-            className="text-white"
-          />
-        </NavItem>
-        <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
-          <Icon icon="cbi:roomsattic" width={25} className="text-white" />
-        </NavItem>
+        <Link to={"/dashboard"}>
+          <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
+            <Icon
+              icon="mage:dashboard-3-fill"
+              width={25}
+              className="text-white"
+            />
+          </NavItem>
+        </Link>
+        <Link to={"/dashboard/view-users"}>
+          <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
+            <Icon
+              icon="heroicons:users-16-solid"
+              width={25}
+              className="text-white"
+            />
+          </NavItem>
+        </Link>
+        <Link to={"/dashboard/view-rooms"}>
+          <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+            <Icon icon="cbi:roomsattic" width={25} className="text-white" />
+          </NavItem>
+        </Link>
       </div>
     </nav>
   );

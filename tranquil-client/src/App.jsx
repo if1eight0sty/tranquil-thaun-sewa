@@ -11,6 +11,7 @@ import Rooms from "./pages/rooms/rooms-table/rooms";
 import AddRoom from "./pages/rooms/rooms-table/add-room";
 import RoomDetails from "./pages/rooms/rooms-details/room-details";
 import CheckOut from "./pages/check-out/check-out";
+import Users from "./pages/users/users-table/users";
 function App() {
   return (
     <Routes>
@@ -27,6 +28,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route path="" element={<Dashboard />} />
         <Route path="view-rooms" element={<Rooms />} />
+        <Route path="view-users" element={<Users />} />
         <Route path="profile" element={<UserProfile />} />
         <Route path="add-room" element={<AddRoom />} />
       </Route>
