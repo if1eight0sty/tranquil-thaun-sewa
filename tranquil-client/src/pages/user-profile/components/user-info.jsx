@@ -10,11 +10,15 @@ export default function UserInfo() {
           <div className="[#6B7280]  space-y-3">
             <p>Full Name</p>
             <p>Email Address</p>
+            {user?.phone && <p>Phone</p>}
+            {user?.address && <p>Address</p>}
             <p>Role</p>
           </div>
           <div className="] space-y-3">
-            <p className="capitalize">{user?.name || "John Doe"}</p>
-            <p>{user?.email || "johndoe@gmail.com"}</p>
+            <p className="capitalize">{user?.name || ""}</p>
+            <p>{user?.email || ""}</p>
+            {user?.phone && <p>{user?.phone}</p>}
+            {user?.address && <p>{user?.address}</p>}
             <p className="capitalize">{user?.role || "user"}</p>
           </div>
         </div>

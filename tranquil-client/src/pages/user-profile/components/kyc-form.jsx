@@ -1,18 +1,33 @@
 import { useState } from "react";
-
-export default function KycForm() {
+import { applyKYC } from "../helper";
+import toast from "react-hot-toast";
+import { getUser } from "../../../layout/helper";
+export default function KycForm({ setFlag }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  const [roomData, setRoomData] = useState({
+  const [kycData, setKycData] = useState({
     name: "",
     address: "",
     phone: "",
     email: user.email,
   });
   const handleOnChange = (e) => {
-    setRoomData({ ...roomData, [e.target.name]: e.target.value });
+    setKycData({ ...kycData, [e.target.name]: e.target.value });
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
+    if (!kycData.name || !kycData.address || !kycData.phone) {
+      return toast.error("All fields are required");
+    }
+    try {
+      const response = await applyKYC(kycData);
+      if (response.status !== 200) throw new Error(response.message);
+      await getUser();
+      setKycData({ name: "", address: "", phone: "", email: user.email });
+      setFlag(false);
+      toast.success("KYC applied successfully");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -29,7 +44,7 @@ export default function KycForm() {
           type="text"
           id="name"
           name="name"
-          value={roomData.name}
+          value={kycData.name}
           onChange={handleOnChange}
           placeholder="Enter name"
           className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"
@@ -44,13 +59,26 @@ export default function KycForm() {
           type="email"
           id="email"
           name="email"
-          value={roomData.email}
+          value={kycData.email}
           disabled
           placeholder="Enter address"
           className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"
         />
       </div>
-
+      <div className="space-y-1">
+        <label htmlFor="phone" className="font-medium">
+          Phone
+        </label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          value={kycData.phone}
+          onChange={handleOnChange}
+          placeholder="Enter phone"
+          className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"
+        />
+      </div>
       <div className="space-y-1">
         <label htmlFor="address" className="font-medium">
           Address
@@ -59,7 +87,7 @@ export default function KycForm() {
           type="text"
           id="address"
           name="address"
-          value={roomData.address}
+          value={kycData.address}
           onChange={handleOnChange}
           placeholder="Enter address"
           className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 dark:border-gray-600 dark:bg-gray-800 dark:placeholder-gray-400 dark:focus:border-blue-500"

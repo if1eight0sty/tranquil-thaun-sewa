@@ -8,3 +8,12 @@ export const getUserProfile = async () => {
     throw new Error("Failed to get user profile");
   }
 };
+
+export const applyKYC = async (data) => {
+  try {
+    const response = await authAxios().post("users/kyc", data);
+    return response.data;
+  } catch {
+    throw new Error("Failed to apply KYC");
+  }
+};

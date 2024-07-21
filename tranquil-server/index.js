@@ -8,7 +8,8 @@ import path from "path";
 import cookieParser from "cookie-parser";
 
 // routes
-import authRoute from "./routes/auth-routes.js";
+import authRoute from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
 dotenv.config();
 const app = express();
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -36,6 +37,7 @@ mongoose
   });
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/users", userRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(

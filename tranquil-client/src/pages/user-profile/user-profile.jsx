@@ -28,7 +28,7 @@ export default function UserProfile() {
             <p>Fill in the kyc</p>
             <p>To post rooms for rent</p>
           </div>
-          <KycForm />
+          <KycForm setFlag={setFlag} />
         </>
       )}
     </div>

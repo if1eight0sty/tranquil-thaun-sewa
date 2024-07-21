@@ -1,17 +1,33 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import toast from "react-hot-toast";
+import { logout, getUser } from "../helper";
+import { useCallback, useEffect } from "react";
 export default function AppBar() {
   const navigate = useNavigate();
-  // Get user data from local storage
-  const user = JSON.parse(localStorage.getItem("user"));
-  // Handle logout button click event
-  const handleLogoutClick = () => {
-    // Remove user data from local storage
-    localStorage.removeItem("user");
-
-    // Navigate to login page
-    navigate("/login");
+  const token = localStorage.getItem("token");
+  const handleLogoutClick = async () => {
+    try {
+      const response = await logout();
+      if (response.status !== 200) throw new Error(response.message);
+      toast.success("Logged out successfully");
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch {
+      toast.error("Failed to logout");
+    }
   };
+  const getUserInfo = useCallback(async () => {
+    try {
+      await getUser();
+    } catch (error) {
+      throw new Error("User not found.");
+    }
+  }, []);
+  useEffect(() => {
+    getUserInfo();
+  }, [getUserInfo]);
   return (
     <header className="py-4 px-20 text-[#2e2e2e]/80 @[30em]:px-6 @[50em]:px-10 @[1300px]:px-16 @[1300px]:py-3 border-b sticky top-0 z-10 bg-white ">
       <nav className="flex items-center justify-between px-4">
@@ -31,11 +47,9 @@ export default function AppBar() {
               Rooms
             </Link>
           </li>
-          {user ? (
-            <li className="" onClick={() => handleLogoutClick()}>
-              <Link to="/login" className="outline-none">
-                Logout
-              </Link>
+          {token ? (
+            <li className="cursor-pointer" onClick={() => handleLogoutClick()}>
+              Logout
             </li>
           ) : (
             <li>

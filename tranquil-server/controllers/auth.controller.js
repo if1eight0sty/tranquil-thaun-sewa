@@ -83,6 +83,8 @@ export const logout = catchSync(async (req, res) => {
   }
   user.token = "";
   await user.save();
+  res.clearCookie("refreshToken");
+  res.status(200).json({ message: "Logout successful", status: 200 });
 });
 
 export const me = catchSync(async (req, res) => {
