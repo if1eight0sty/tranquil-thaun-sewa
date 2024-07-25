@@ -8,6 +8,7 @@ import {
   getRoom,
   getRooms,
   updateRoom,
+  getLatestRooms,
 } from "../controllers/room.controller.js";
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.post(
   createRoom
 );
 router.get("/", verifyAccessToken, getRooms);
+router.get("/latest", verifyAccessToken, getLatestRooms);
 router.get("/:id", verifyAccessToken, getRoom);
 router.put(
   "/:id",

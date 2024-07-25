@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { addRoom } from "./helper";
-
-export default function AddRoom() {
+import { useParams } from "react-router-dom";
+import { getRoom } from "../helper";
+import { updateRoom } from "./helper";
+export default function UpdateRoom() {
+  const { id } = useParams();
   const [roomData, setRoomData] = useState({
     title: "",
     description: "",
     price: "",
     images: [],
   });
+  const getRoomDetails = useCallback(async () => {
+    try {
+      const room = await getRoom(id);
+      setRoomData({
+        title: room.title,
+        description: room.description,
+        price: room.price,
+        images: room.images,
+      });
+    } catch {
+      toast.error("Error in fetching room");
+    }
+  }, [id]);
   const handleOnChange = (e) => {
     if (e.target.name === "images") {
       setRoomData({ ...roomData, images: e.target.files });
@@ -18,14 +33,7 @@ export default function AddRoom() {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !roomData.title ||
-      !roomData.description ||
-      !roomData.price ||
-      roomData.images.length === 0
-    ) {
-      return toast.error("Please fill all the fields and add images");
-    }
+
     const formData = new FormData();
     formData.append("title", roomData.title);
     formData.append("description", roomData.description);
@@ -33,9 +41,9 @@ export default function AddRoom() {
     for (let i = 0; i < roomData.images.length; i++) {
       formData.append("images", roomData.images[i]);
     }
-    const isSuccess = await addRoom(formData);
+    const isSuccess = await updateRoom(id, formData);
     if (isSuccess) {
-      toast.success("Room added successfully");
+      toast.success("Room updates successfully");
       setRoomData({
         title: "",
         description: "",
@@ -45,12 +53,15 @@ export default function AddRoom() {
     }
   };
 
+  useEffect(() => {
+    getRoomDetails();
+  }, [getRoomDetails]);
   return (
     <form
       onSubmit={handleOnSubmit}
       className="space-y-4 text-gray-100 max-w-[25em] border bg-gray-700 p-5 mt-5 rounded"
     >
-      <h3 className="text-xl font-semibold">Add Room</h3>
+      <h3 className="text-xl font-semibold">Update Room</h3>
       <div className="space-y-1">
         <label htmlFor="title" className="font-medium">
           Title
@@ -117,7 +128,7 @@ export default function AddRoom() {
           type="submit"
           className="px-6 py-2 font-bold text-white bg-transparent border rounded-lg "
         >
-          Add
+          Update
         </button>
       </div>
     </form>

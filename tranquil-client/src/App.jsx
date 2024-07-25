@@ -12,6 +12,7 @@ import AddRoom from "./pages/rooms/rooms-table/add-room";
 import RoomDetails from "./pages/rooms/rooms-details/room-details";
 import CheckOut from "./pages/check-out/check-out";
 import Users from "./pages/users/users-table/users";
+import UpdateRoom from "./pages/rooms/rooms-table/update-room";
 function App() {
   return (
     <Routes>
@@ -21,14 +22,16 @@ function App() {
       <Route path="/" element={<UserLayout />}>
         <Route path="" element={<Home />} />
         <Route path="profile" element={<UserProfile />} />
-        <Route path="view-rooms" element={<ViewRooms />} />
         <Route path="room/:id" element={<RoomDetails />} />
+        <Route path="view-rooms" element={<ViewRooms />} />
         <Route path="checkout" element={<CheckOut />} />
       </Route>
-      <Route path="/dashboard" element={<DashboardLayout />}>
+      <Route path="/dashboard/" element={<DashboardLayout />}>
         <Route path="" element={<Dashboard />} />
         <Route path="view-rooms" element={<Rooms />} />
         <Route path="view-users" element={<Users />} />
+        <Route path="add-room" element={<AddRoom />} />
+        <Route path="update-room/:id" element={<UpdateRoom />} />
         <Route path="profile" element={<UserProfile />} />
         <Route path="add-room" element={<AddRoom />} />
       </Route>

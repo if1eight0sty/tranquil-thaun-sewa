@@ -4,9 +4,10 @@ import Divider from "../../components/divider";
 import RoomCard from "./components/room-card";
 import toast from "react-hot-toast";
 import { useCallback, useEffect, useState } from "react";
-import { getLatestUsers } from "./helper";
+import { getLatestUsers, getLatestRooms } from "./helper";
 export default function Dashboard() {
   const [users, setUsers] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const getUsers = useCallback(async () => {
     try {
       const users = await getLatestUsers();
@@ -15,9 +16,18 @@ export default function Dashboard() {
       toast.error(error.message);
     }
   }, []);
+  const getRooms = useCallback(async () => {
+    try {
+      const users = await getLatestRooms();
+      setRooms(users);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }, []);
   useEffect(() => {
     getUsers();
-  }, [getUsers]);
+    getRooms();
+  }, [getUsers, getRooms]);
   return (
     <div>
       <Statistics />
@@ -25,24 +35,21 @@ export default function Dashboard() {
         <div className="flex-1">
           <Divider title={"Users"} />
           <div className="h-[15em] overflow-y-auto">
-            {users.map((user) => (
-              <UserCard key={user._id} user={user} />
-            ))}
+            {Array.isArray(users) && users.length > 0 ? (
+              users.map((user) => <UserCard key={user._id} user={user} />)
+            ) : (
+              <p className="text-center">No users found</p>
+            )}
           </div>
         </div>
         <div className="flex-1">
           <Divider title={"Rooms"} />
           <div className=" h-[15em] overflow-y-auto ">
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
+            {Array.isArray(rooms) && rooms.length > 0 ? (
+              rooms.map((room) => <RoomCard key={room._id} room={room} />)
+            ) : (
+              <p className="text-center">No rooms found</p>
+            )}
           </div>
         </div>
       </div>

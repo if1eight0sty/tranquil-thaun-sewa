@@ -52,7 +52,7 @@ export default function Sidebar() {
             <Icon icon="cbi:roomsattic" width={25} className="text-white" />
           </NavItem>
         </Link>
-        <button onClick={handleLogoutClick}>
+        <div onClick={handleLogoutClick}>
           <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
             <Icon
               icon="solar:logout-2-bold"
@@ -60,7 +60,7 @@ export default function Sidebar() {
               className="text-white"
             />
           </NavItem>
-        </button>
+        </div>
       </div>
     </nav>
   );
