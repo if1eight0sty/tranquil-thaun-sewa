@@ -37,19 +37,27 @@ export const getRooms = catchAsync(async (req, res) => {
   if (user.role?.includes("admin")) {
     const rooms = await Room.find().populate("seller");
     return res.status(200).json({
-      message: "Rooms fetched successfully",
+      message: "rooms fetched successfully",
       status: 200,
       rooms,
     });
   }
   const rooms = await Room.find({ seller: req.user.id }).populate("seller");
   res.status(200).json({
-    message: "Rooms fetched successfully",
+    message: "rooms fetched successfully",
     status: 200,
     rooms,
   });
 });
 
+export const getAvailableRooms = catchAsync(async (req, res) => {
+  const rooms = await Room.find({ status: "available" }).populate("seller");
+  res.status(200).json({
+    message: "rooms fetched successfully",
+    status: 200,
+    rooms,
+  });
+});
 export const getRoom = catchAsync(async (req, res) => {
   const room = await Room.findById(req.params.id);
   if (!room) {
@@ -66,6 +74,14 @@ export const getRoom = catchAsync(async (req, res) => {
 });
 export const getLatestRooms = async (req, res) => {
   const rooms = await Room.find().sort({ createdAt: -1 }).limit(5);
+  res.status(200).json({
+    message: "Rooms fetched successfully",
+    status: 200,
+    rooms,
+  });
+};
+export const getFeaturedRooms = async (req, res) => {
+  const rooms = await Room.find().sort({ createdAt: -1 }).limit(6);
   res.status(200).json({
     message: "Rooms fetched successfully",
     status: 200,

@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
 import { cn } from "../../../utility/index";
-export default function RoomCards({ className, address, price, image }) {
+export default function RoomCards({ room }) {
   return (
     <div
       className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-zinc-700 dark:border-white/[0.2] border border-transparent justify-between flex flex-col space-y-4",
-        className
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-zinc-700 dark:border-white/[0.2] border border-transparent justify-between flex flex-col space-y-4"
       )}
     >
       <div className="h-[9em]">
-        <img src={image} alt="" className="object-cover w-full h-full" />
+        <img
+          src={room?.images?.[0]}
+          alt=""
+          className="object-cover w-full h-full"
+        />
       </div>
       <div className="transition duration-200 group-hover/bento:translate-x-2">
-        <p className="font-semibold text-white"> Rs. {price}</p>
+        <p className="font-semibold text-white"> Rs. {room?.price}</p>
         <div className="mt-2 mb-2 font-sans font-semibold text-neutral-600 dark:text-neutral-200 line-clamp-1">
-          {address}
+          {room?.address}
         </div>
         <Link
-          to={"/room/69"}
+          to={`/room/${room._id}`}
           className="relative inline-block p-px text-xs font-semibold leading-6 text-white no-underline rounded-full shadow-2xl cursor-pointer bg-slate-700 group shadow-zinc-900"
         >
           <span className="absolute inset-0 overflow-hidden rounded-full">

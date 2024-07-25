@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import { getRooms } from "./helper";
+import { getRooms, deleteRoom } from "./helper";
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 export default function Rooms() {
@@ -13,6 +13,20 @@ export default function Rooms() {
       toast.error("Error in fetching rooms");
     }
   }, []);
+  const handleDeleteClick = useCallback(
+    async (id) => {
+      try {
+        const isSuccess = await deleteRoom(id);
+        if (isSuccess) {
+          toast.success("Room deleted successfully");
+          getAllRooms();
+        }
+      } catch {
+        toast.error("Error in deleting room");
+      }
+    },
+    [getAllRooms]
+  );
   useEffect(() => {
     getAllRooms();
   }, [getAllRooms]);
@@ -37,7 +51,6 @@ export default function Rooms() {
               <th scope="col" className="px-6 py-4 font-medium text-gray-900">
                 Rate(Rs)
               </th>
-
               <th
                 scope="col"
                 className="px-6 py-4 font-medium text-gray-900"
@@ -75,14 +88,23 @@ export default function Rooms() {
                   </td>
                   <td className="px-6 py-4">{room?.price}</td>
                   <td className="px-6 py-4">
-                    <div className="flex justify-end gap-4">
+                    <div className="flex items-center justify-end gap-4">
+                      <Link to={`/room/${room._id}`} className="cursor-pointer">
+                        <Icon
+                          icon="ic:baseline-info"
+                          className="w-5 h-5 text-blue-700"
+                        />
+                      </Link>
                       <Link
                         to={`/dashboard/update-room/${room._id}`}
                         className="cursor-pointer"
                       >
                         <Icon icon="akar-icons:edit" className="w-5 h-5" />
                       </Link>
-                      <p className="cursor-pointer">
+                      <p
+                        className="cursor-pointer"
+                        onClick={() => handleDeleteClick(room._id)}
+                      >
                         <Icon
                           icon="ic:baseline-delete"
                           className="w-5 h-5 text-red-500"

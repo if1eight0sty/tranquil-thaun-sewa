@@ -1,23 +1,36 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getRoomInfo } from "./helper";
 export default function RoomDetails() {
   const { id } = useParams();
-  useEffect(() => {}, [id]);
+  const [roomDetails, setRoomDetails] = useState({});
+  const getRoomDetails = useCallback(async () => {
+    try {
+      const room = await getRoomInfo(id);
+      setRoomDetails(room);
+    } catch {
+      throw new Error("Error fetching room info");
+    }
+  }, [id]);
+  useEffect(() => {
+    getRoomDetails();
+  }, [getRoomDetails]);
   return (
     <div className="px-4 py-8 lg:px-20 md:px-6 md:py-12 h-[calc(100dvh-5em)]">
       <div className="items-center justify-between lg:flex">
         <div className="lg:w-1/3">
-          <h1 className="text-4xl font-semibold leading-9 text-gray-800">
-            Indoor Interiors
+          <h1 className="text-4xl font-semibold leading-9 text-gray-800 capitalize">
+            {roomDetails?.title}
           </h1>
           <p className="mt-4 text-base leading-6 text-gray-600">
-            Get inspired by our curated selection of luxiwood interiors. We hope
-            get inspired to have luxiwood interior yourself. You’ll find tips
-            here where you can buy a lot of cool furniture.
+            {roomDetails?.description}
           </p>
 
-          <p className="mt-2 font-semibold">Rs. 13000</p>
+          <p className="mt-2 text-lg font-bold capitalize">
+            {roomDetails?.address}
+          </p>
+          <p className="mt-2 font-semibold">Rs. {roomDetails?.price}</p>
           <button className="flex items-center text-base font-semibold leading-none text-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none md:mt-8 hover:underline">
             <span>Proceed to Rent</span>
             <Icon
