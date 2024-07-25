@@ -1,9 +1,24 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavItem from "./nav-item";
+import { logout } from "../helper";
+import toast from "react-hot-toast";
 export default function Sidebar() {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
+  const handleLogoutClick = async () => {
+    try {
+      const response = await logout();
+      if (response.status !== 200) throw new Error(response.message);
+      toast.success("Logged out successfully");
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch {
+      toast.error("Failed to logout");
+    }
+  };
   return (
     <nav className="flex flex-col items-center h-full gap-2 p-4 w-fit bg-slate-950">
       <Link
@@ -37,6 +52,15 @@ export default function Sidebar() {
             <Icon icon="cbi:roomsattic" width={25} className="text-white" />
           </NavItem>
         </Link>
+        <button onClick={handleLogoutClick}>
+          <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+            <Icon
+              icon="solar:logout-2-bold"
+              width={25}
+              className="text-white"
+            />
+          </NavItem>
+        </button>
       </div>
     </nav>
   );
