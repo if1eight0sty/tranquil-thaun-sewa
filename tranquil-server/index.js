@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import authRoute from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import roomRoute from "./routes/room.routes.js";
+import reviewRoute from "./routes/review.routes.js";
 dotenv.config();
 const app = express();
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -40,6 +41,7 @@ mongoose
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/rooms", roomRoute);
+app.use("/api/v1/reviews", reviewRoute);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(
