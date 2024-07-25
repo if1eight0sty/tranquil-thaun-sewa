@@ -1,4 +1,4 @@
-import User from "../models/user.modal.js";
+import User from "../models/user.model.js";
 import catchSync from "../utility/catch-sync.js";
 export const createKYC = catchSync(async (req, res) => {
   const { name, address, phone } = req.body;
@@ -30,6 +30,7 @@ export const verifyKYC = catchSync(async (req, res) => {
     });
   }
   foundUser.canPost = true;
+  foundUser.role?.push("seller");
   await foundUser.save();
   res.status(200).json({
     message: "KYC verified",
@@ -62,7 +63,7 @@ export const deleteUser = catchSync(async (req, res) => {
       status: 400,
     });
   }
-  await user.remove();
+  await user.deleteOne();
   res.status(200).json({
     message: "User deleted successfully",
     status: 200,

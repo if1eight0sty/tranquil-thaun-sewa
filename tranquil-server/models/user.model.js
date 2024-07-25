@@ -39,6 +39,24 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
+    rooms: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Room",
+      },
+    ],
+    payments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Payment",
+      },
+    ],
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );

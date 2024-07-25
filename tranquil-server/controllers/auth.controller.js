@@ -1,4 +1,4 @@
-import User from "../models/user.modal.js";
+import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import catchSync from "../utility/catch-sync.js";
