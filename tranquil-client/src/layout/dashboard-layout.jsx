@@ -9,7 +9,6 @@ export default function DashboardLayout() {
       <div className="w-full">
         <header className="py-4 pl-6 pr-20 @[30em]:px-6 @[50em]:px-10 @[1300px]:px-16 @[1300px]:py-3 border-b sticky top-0 z-10 ">
           <nav className="flex items-center justify-between">
-            {/* Account */}
             <h1 className="text-xl font-semibold">Hi, User!</h1>
             <div className="border rounded-full border-[#2e2e2e] p-[3px] group relative">
               <span title="Account" className="cursor-pointer select-none">

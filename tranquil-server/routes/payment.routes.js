@@ -5,6 +5,6 @@ import { createPayment } from "../controllers/payment.controller.js";
 
 const router = express.Router();
 
-router.post("/", verifyAccessToken, createPayment);
+router.post("/:id", verifyAccessToken, createPayment);
 
 export default router;

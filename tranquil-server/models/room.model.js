@@ -9,7 +9,7 @@ const roomSchema = new Schema(
     description: {
       type: String,
       required: true,
-      minLength: 20,
+      minLength: 5,
       maxLength: 500,
     },
     price: {

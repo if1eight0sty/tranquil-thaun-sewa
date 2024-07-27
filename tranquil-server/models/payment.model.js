@@ -14,6 +14,12 @@ const paymentSchema = new Schema(
       type: Number,
       required: true,
     },
+    type: {
+      type: String,
+      enum: ["cod", "stripe"],
+      default: "cod",
+      required: true,
+    },
     paymentIntentId: {
       type: String,
     },
