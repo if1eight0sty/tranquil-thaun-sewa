@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { getRoomCount } from "../helper";
+import { getRoomCount, getUserCount } from "../helper";
 
 export default function Statistics() {
   const [numberOfRooms, setNumberOfRooms] = useState(0);
+  const [numberOfUsers, setNumberOfUsers] = useState(0);
   const getNumberOfRooms = useCallback(async () => {
     try {
       const room = await getRoomCount();
@@ -11,10 +12,19 @@ export default function Statistics() {
       throw new Error("Error while fetching room count");
     }
   }, []);
+  const getNumberOfUsers = useCallback(async () => {
+    try {
+      const users = await getUserCount();
+      setNumberOfUsers(users);
+    } catch {
+      throw new Error("Error while fetching room count");
+    }
+  }, []);
 
   useEffect(() => {
     getNumberOfRooms();
-  }, [getNumberOfRooms]);
+    getNumberOfUsers();
+  }, [getNumberOfRooms, getNumberOfUsers]);
   return (
     <div className="mt-3 bg-gray-600 rounded dark:text-gray-100">
       <div className="container px-4 py-10 mx-auto lg:px-8 lg:py-16 xl:max-w-7xl">
@@ -29,7 +39,7 @@ export default function Statistics() {
           </dl>
           <dl className="px-5 py-8 space-y-1">
             <dt className="text-4xl font-extrabold text-black dark:text-white">
-              2,500+
+              {numberOfUsers}+
             </dt>
             <dd className="text-sm font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-500">
               Clients

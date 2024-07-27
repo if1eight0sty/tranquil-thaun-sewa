@@ -30,7 +30,7 @@ router.get(
   "/count",
   verifyAccessToken,
   verifyRole(["admin"]),
-  getAvailableRooms
+  getNumberOfRooms
 );
 router.get("/:id", verifyAccessToken, getRoom);
 router.put(

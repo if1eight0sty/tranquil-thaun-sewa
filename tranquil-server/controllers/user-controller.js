@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
-import catchSync from "../utility/catch-sync.js";
-export const createKYC = catchSync(async (req, res) => {
+import catchAsync from "../utility/catch-sync.js";
+export const createKYC = catchAsync(async (req, res) => {
   const { name, address, phone } = req.body;
   const user = await User.findById(req.user.id);
   if (!user) {
@@ -20,7 +20,7 @@ export const createKYC = catchSync(async (req, res) => {
   });
 });
 
-export const verifyKYC = catchSync(async (req, res) => {
+export const verifyKYC = catchAsync(async (req, res) => {
   const { user } = req.body;
   const foundUser = await User.findById(user);
   if (!foundUser) {
@@ -38,14 +38,14 @@ export const verifyKYC = catchSync(async (req, res) => {
   });
 });
 
-export const getUsers = catchSync(async (req, res) => {
+export const getUsers = catchAsync(async (req, res) => {
   const users = await User.find();
   res.status(200).json({
     users: users.filter((user) => user.role?.[0] !== "admin"),
     status: 200,
   });
 });
-export const getLatestUsers = catchSync(async (req, res) => {
+export const getLatestUsers = catchAsync(async (req, res) => {
   const users = await User.find({ canPost: true })
     .sort({ createdAt: -1 })
     .limit(5);
@@ -54,8 +54,15 @@ export const getLatestUsers = catchSync(async (req, res) => {
     status: 200,
   });
 });
-
-export const deleteUser = catchSync(async (req, res) => {
+export const getNumberOfUsers = catchAsync(async (req, res) => {
+  const users = await User.find().countDocuments();
+  res.status(200).json({
+    message: "Rooms fetched successfully",
+    status: 200,
+    users,
+  });
+});
+export const deleteUser = catchAsync(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     return res.status(400).json({

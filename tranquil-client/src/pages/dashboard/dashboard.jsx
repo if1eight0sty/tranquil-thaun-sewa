@@ -31,7 +31,7 @@ export default function Dashboard() {
     getRooms();
   }, [getUsers, getRooms]);
 
-  return user?.roles?.includes("admin") ? (
+  return user?.role?.includes("admin") ? (
     <div>
       <Statistics />
       <div className="gap-3 mt-5 md:flex">

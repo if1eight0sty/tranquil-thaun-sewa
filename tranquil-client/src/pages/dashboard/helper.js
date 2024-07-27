@@ -27,3 +27,11 @@ export const getRoomCount = async () => {
     throw new Error("Error while fetching room count");
   }
 };
+export const getUserCount = async () => {
+  try {
+    const response = await authAxios().get("users/count");
+    return response.data.status === 200 ? response.data.users : 0;
+  } catch {
+    throw new Error("Error while fetching room count");
+  }
+};

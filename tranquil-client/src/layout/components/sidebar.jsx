@@ -68,7 +68,7 @@ export default function Sidebar() {
           </NavItem>
         </Link>
         <div onClick={handleLogoutClick}>
-          <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+          <NavItem selected={selected === 3} id={3} setSelected={setSelected}>
             <Icon
               icon="solar:logout-2-bold"
               width={25}
