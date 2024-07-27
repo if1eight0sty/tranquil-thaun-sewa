@@ -11,6 +11,7 @@ import {
   getLatestRooms,
   getFeaturedRooms,
   getAvailableRooms,
+  getNumberOfRooms,
 } from "../controllers/room.controller.js";
 const router = express.Router();
 
@@ -25,6 +26,12 @@ router.get("/", verifyAccessToken, getRooms);
 router.get("/latest", verifyAccessToken, getLatestRooms);
 router.get("/featured", getFeaturedRooms);
 router.get("/available", getAvailableRooms);
+router.get(
+  "/count",
+  verifyAccessToken,
+  verifyRole(["admin"]),
+  getAvailableRooms
+);
 router.get("/:id", verifyAccessToken, getRoom);
 router.put(
   "/:id",

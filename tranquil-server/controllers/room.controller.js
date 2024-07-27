@@ -72,6 +72,22 @@ export const getRoom = catchAsync(async (req, res) => {
     room,
   });
 });
+export const getNumberOfRooms = catchAsync(async (req, res) => {
+  const rooms = await Room.find().countDocuments();
+  res.status(200).json({
+    message: "Rooms fetched successfully",
+    status: 200,
+    rooms,
+  });
+});
+export const getMySeller = catchAsync(async (req, res) => {
+  const rooms = await Room.find({ seller: req.user.id });
+  res.status(200).json({
+    message: "Rooms fetched successfully",
+    status: 200,
+    rooms,
+  });
+});
 export const getLatestRooms = async (req, res) => {
   const rooms = await Room.find().sort({ createdAt: -1 }).limit(5);
   res.status(200).json({

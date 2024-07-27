@@ -5,7 +5,9 @@ import RoomCard from "./components/room-card";
 import toast from "react-hot-toast";
 import { useCallback, useEffect, useState } from "react";
 import { getLatestUsers, getLatestRooms } from "./helper";
+import { Navigate } from "react-router-dom";
 export default function Dashboard() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [users, setUsers] = useState([]);
   const [rooms, setRooms] = useState([]);
   const getUsers = useCallback(async () => {
@@ -28,7 +30,8 @@ export default function Dashboard() {
     getUsers();
     getRooms();
   }, [getUsers, getRooms]);
-  return (
+
+  return user?.roles?.includes("admin") ? (
     <div>
       <Statistics />
       <div className="gap-3 mt-5 md:flex">
@@ -54,5 +57,7 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  ) : (
+    <Navigate to={"/dashboard/view-rooms"} />
   );
 }

@@ -18,3 +18,12 @@ export const getLatestRooms = async () => {
     throw new Error("Error while fetching latest rooms");
   }
 };
+
+export const getRoomCount = async () => {
+  try {
+    const response = await authAxios().get("rooms/count");
+    return response.data.status === 200 ? response.data.rooms : 0;
+  } catch {
+    throw new Error("Error while fetching room count");
+  }
+};
