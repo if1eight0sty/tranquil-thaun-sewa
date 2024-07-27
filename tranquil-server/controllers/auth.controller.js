@@ -40,8 +40,7 @@ export const login = catchSync(async (req, res) => {
       status: 400,
     });
   }
-  const user = await User.findOne({ email });
-  console.log("👻 -> login -> user <3", user);
+  const user = await User.findOne({ email }).select("-password -token");
   if (!user) {
     return res.status(400).json({
       message: "Invalid credentials",

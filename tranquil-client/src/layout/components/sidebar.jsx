@@ -6,6 +6,8 @@ import { logout } from "../helper";
 import toast from "react-hot-toast";
 export default function Sidebar() {
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
   const [selected, setSelected] = useState(0);
   const handleLogoutClick = async () => {
     try {
@@ -29,24 +31,37 @@ export default function Sidebar() {
         <Icon icon="cbi:living-room" width={40} className="text-white" />
       </Link>
       <div className="flex flex-col justify-center flex-1 gap-3">
-        <Link to={"/dashboard"}>
-          <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
-            <Icon
-              icon="mage:dashboard-3-fill"
-              width={25}
-              className="text-white"
-            />
-          </NavItem>
-        </Link>
-        <Link to={"/dashboard/view-users"}>
-          <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
-            <Icon
-              icon="heroicons:users-16-solid"
-              width={25}
-              className="text-white"
-            />
-          </NavItem>
-        </Link>
+        {user?.role?.includes("admin") && (
+          <>
+            <Link to={"/dashboard"}>
+              <NavItem
+                selected={selected === 0}
+                id={0}
+                setSelected={setSelected}
+              >
+                <Icon
+                  icon="mage:dashboard-3-fill"
+                  width={25}
+                  className="text-white"
+                />
+              </NavItem>
+            </Link>
+            <Link to={"/dashboard/view-users"}>
+              <NavItem
+                selected={selected === 1}
+                id={1}
+                setSelected={setSelected}
+              >
+                <Icon
+                  icon="heroicons:users-16-solid"
+                  width={25}
+                  className="text-white"
+                />
+              </NavItem>
+            </Link>
+          </>
+        )}
+
         <Link to={"/dashboard/view-rooms"}>
           <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
             <Icon icon="cbi:roomsattic" width={25} className="text-white" />

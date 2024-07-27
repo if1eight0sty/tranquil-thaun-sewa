@@ -47,7 +47,7 @@ export default function KycForm({ setFlag }) {
           value={kycData.name}
           onChange={handleOnChange}
           placeholder="Enter name"
-          className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50"
+          className="block w-full px-3 py-2 leading-6 text-gray-900 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50"
         />
       </div>
 
@@ -62,7 +62,7 @@ export default function KycForm({ setFlag }) {
           value={kycData.email}
           disabled
           placeholder="Enter address"
-          className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 "
+          className="block w-full px-3 py-2 leading-6 text-gray-900 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50"
         />
       </div>
       <div className="space-y-1">
@@ -76,7 +76,7 @@ export default function KycForm({ setFlag }) {
           value={kycData.phone}
           onChange={handleOnChange}
           placeholder="Enter phone"
-          className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 "
+          className="block w-full px-3 py-2 leading-6 text-gray-900 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50"
         />
       </div>
       <div className="space-y-1">
@@ -90,7 +90,7 @@ export default function KycForm({ setFlag }) {
           value={kycData.address}
           onChange={handleOnChange}
           placeholder="Enter address"
-          className="block w-full px-3 py-2 leading-6 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50 "
+          className="block w-full px-3 py-2 leading-6 text-gray-900 placeholder-gray-500 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-500/50"
         />
       </div>
 

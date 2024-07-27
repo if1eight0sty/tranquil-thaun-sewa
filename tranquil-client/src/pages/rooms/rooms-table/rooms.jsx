@@ -31,14 +31,14 @@ export default function Rooms() {
     getAllRooms();
   }, [getAllRooms]);
   return (
-    <div className="px-6 mt-3">
+    <div className="px-6 mt-3 space-y-5">
       <Link
         to="/dashboard/add-room"
-        className="px-5 py-2 font-bold text-white bg-transparent border rounded-lg"
+        className="px-5 py-2 mt-5 font-bold text-white bg-transparent border rounded"
       >
         Add
       </Link>
-      <div className="m-5 overflow-hidden border border-gray-200 rounded-lg shadow-md bg-slate-200 h-[calc(100dvh-10em)] overflow-y-auto">
+      <div className="overflow-hidden border border-gray-200 rounded-lg shadow-md bg-slate-200 h-[calc(100dvh-10em)] overflow-y-auto">
         <table className="w-full text-sm text-left text-gray-500 bg-white border-collapse">
           <thead className="bg-gray-50">
             <tr>
