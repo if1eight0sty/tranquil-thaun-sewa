@@ -68,7 +68,7 @@ export default function RoomDetails() {
                 roomDetails?.images?.[1] ??
                 "https://i.ibb.co/4Jrp5TB/pexels-max-vakhtbovych-6782370-1.png"
               }
-              className="w-full"
+              className="w-full h-[12em] object-cover"
               alt="kitchen"
             />
             <img
@@ -76,7 +76,7 @@ export default function RoomDetails() {
                 roomDetails?.images?.[2] ??
                 "https://i.ibb.co/4Jrp5TB/pexels-max-vakhtbovych-6782370-1.png"
               }
-              className="w-full"
+              className="w-full h-[12em] object-cover"
               alt="sitting room"
             />
           </div>
