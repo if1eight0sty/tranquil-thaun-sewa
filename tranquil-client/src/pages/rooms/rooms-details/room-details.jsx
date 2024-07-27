@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getRoomInfo } from "./helper";
 export default function RoomDetails() {
   const { id } = useParams();
@@ -31,14 +31,17 @@ export default function RoomDetails() {
             {roomDetails?.address}
           </p>
           <p className="mt-2 font-semibold">Rs. {roomDetails?.price}</p>
-          <button className="flex items-center text-base font-semibold leading-none text-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none md:mt-8 hover:underline">
+          <Link
+            to={`/checkout/${id}`}
+            className="flex items-center text-base font-semibold leading-none text-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none md:mt-8 hover:underline"
+          >
             <span>Proceed to Rent</span>
             <Icon
               icon={"iconoir:fast-arrow-right"}
               width={20}
               className="ml-1"
             />
-          </button>
+          </Link>
         </div>
         <div className="mt-8 lg:w-7/12 lg:mt-0">
           <div className="w-full h-full bg-red-200">

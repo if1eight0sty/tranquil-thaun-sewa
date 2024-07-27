@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { cn } from "../../../../../utility/index";
 
 export const GridItem = ({ className, address, price, image }) => {
-  console.log("👻 -> GridItem -> image <3", image);
   return (
     <div
       data-aos="fade-up"

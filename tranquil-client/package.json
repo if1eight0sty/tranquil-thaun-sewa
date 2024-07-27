@@ -13,6 +13,8 @@
     "@dicebear/collection": "^9.0.1",
     "@dicebear/core": "^9.0.1",
     "@iconify/react": "^5.0.1",
+    "@stripe/react-stripe-js": "^2.7.3",
+    "@stripe/stripe-js": "^4.1.0",
     "@tabler/icons-react": "^3.11.0",
     "aos": "^2.3.4",
     "axios": "^1.7.2",

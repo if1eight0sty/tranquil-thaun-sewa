@@ -13,6 +13,9 @@ export default function Login() {
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+  const navigateTo = (path) => {
+    window.location.href = path;
+  };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!isValidateLoginData(data))
@@ -21,7 +24,12 @@ export default function Login() {
       const res = await loginHelper(data);
       if (res.status !== 200) throw new Error(res.message);
       toast.success(res.message);
-      window.location.href = "/";
+      const { user } = res;
+
+      if (user?.role?.includes("admin")) return navigateTo("/dashboard");
+      if (user?.role?.includes("seller"))
+        return navigateTo("/dashboard/view-rooms");
+      navigateTo("/");
     } catch (error) {
       toast.error(error.message);
     }

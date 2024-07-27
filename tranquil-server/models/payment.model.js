@@ -14,6 +14,9 @@ const paymentSchema = new Schema(
       type: Number,
       required: true,
     },
+    paymentIntentId: {
+      type: String,
+    },
     status: {
       type: String,
       enum: ["pending", "success", "failed"],

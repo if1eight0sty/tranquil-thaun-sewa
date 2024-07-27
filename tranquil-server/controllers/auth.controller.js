@@ -41,6 +41,7 @@ export const login = catchSync(async (req, res) => {
     });
   }
   const user = await User.findOne({ email });
+  console.log("👻 -> login -> user <3", user);
   if (!user) {
     return res.status(400).json({
       message: "Invalid credentials",
@@ -70,7 +71,9 @@ export const login = catchSync(async (req, res) => {
   });
   user.token = refreshToken;
   await user.save();
-  res.status(200).json({ message: "Login successful", token, status: 200 });
+  res
+    .status(200)
+    .json({ message: "Login successful", token, user, status: 200 });
 });
 
 export const logout = catchSync(async (req, res) => {

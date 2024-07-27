@@ -9,6 +9,7 @@ export const loginHelper = async (data) => {
   try {
     const res = await authAxios().post("auth/login", data);
     localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
     return res.data;
   } catch (error) {
     throw new Error("Login fail.");

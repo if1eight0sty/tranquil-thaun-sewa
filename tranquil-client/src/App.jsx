@@ -24,7 +24,7 @@ function App() {
         <Route path="profile" element={<UserProfile />} />
         <Route path="room/:id" element={<Room />} />
         <Route path="view-rooms" element={<ViewRooms />} />
-        <Route path="checkout" element={<CheckOut />} />
+        <Route path="checkout/:room" element={<CheckOut />} />
       </Route>
       <Route path="/dashboard/" element={<DashboardLayout />}>
         <Route path="" element={<Dashboard />} />
