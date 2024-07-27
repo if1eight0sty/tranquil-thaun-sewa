@@ -34,7 +34,7 @@ export default function Rooms() {
     <div className="px-6 mt-3">
       <Link
         to="/dashboard/add-room"
-        className="px-5 py-2 font-bold text-white bg-transparent border rounded-lg "
+        className="px-5 py-2 font-bold text-white bg-transparent border rounded-lg"
       >
         Add
       </Link>
